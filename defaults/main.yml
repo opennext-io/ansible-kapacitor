@@ -11,6 +11,11 @@ kapacitor_tick_work_dir: "/usr/local/etc/kapacitor/tick"
 kapacitor_tick_script_dest_dir: "{{ kapacitor_tick_work_dir }}/script"
 kapacitor_tick_template_dest_dir: "{{ kapacitor_tick_work_dir }}/template"
 kapacitor_tick_var_dest_dir: "{{ kapacitor_tick_work_dir }}/var"
+kapacitor_handler_dest_dir: "{{ kapacitor_tick_work_dir }}/handler"
+kapacitor_handlers: [
+  #{ name: "exemple1", enabled: true },
+  #{ name: "exemple2", enabled: false }
+]
 kapacitor_tick_script_dir: './tests/files/tick/script'
 kapacitor_tick_template_dir: './tests/files/tick/template'
 kapacitor_tick_var_dir: './tests/files/tick/var'

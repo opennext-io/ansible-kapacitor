@@ -1,0 +1,25 @@
+---
+- name: 'Create Kapacitor Handlers directory'
+  file:
+    path:  "{{ kapacitor_handler_dest_dir }}"
+    state: 'directory'
+    recurse: 'yes'
+  tags: ['kapacitor-handlers']
+
+- name: 'Dump kapacitor handlers'
+  template:
+    src: "{{ kapacitor_tick_handler_dir}}/{{ item.name }}.yml.j2"
+    dest: "{{ kapacitor_handler_dest_dir }}/{{ item.name }}.yml"
+  with_items: "{{ kapacitor_handlers }}"
+  tags: ['kapacitor-handlers']
+
+# TODO: verify topic handlers are effectively created with list topic-handlers
+
+- name: 'define topic handlers'
+  shell: "kapacitor {% if item.enabled %}define-topic-handler{% endif %}{{ kapacitor_handler_dest_dir }}/{{ item.name }}.yml"
+  when:
+    - kapacitor_handlers | length > 0
+  with_items: "{{ kapacitor_handlers }}"
+  tags: ['kapacitor-handlers']
+
+# TODO: Delete topic handlers that are not enabled delete topic-handlers

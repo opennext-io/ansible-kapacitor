@@ -3,5 +3,6 @@
 - include: 'configure.yml'
 - include: 'service.yml'
 - include: 'tick.yml'
+- include: 'handler.yml'
 - include: 'cluster.yml'
   when: kapacitor_cluster_join == true

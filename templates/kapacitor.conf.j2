@@ -136,6 +136,7 @@ default-retention-policy = "{{ kapacitor_default_retention_policy }}"
   channel = "{{ kapacitor_slack_channel }}"
   enabled = {{ kapacitor_slack_enabled | to_json }}
   global = {{ kapacitor_slack_global | to_json }}
+  default = {{ kapacitor_slack_default | to_json}}
   icon-emoji = "{{ kapacitor_slack_icon_emoji }}"
   insecure-skip-verify = {{ kapacitor_slack_insecure_skip_verify | to_json }}
   ssl-ca = "{{ kapacitor_slack_ssl_ca }}"

@@ -50,15 +50,12 @@
           {%if item.template is defined %}-template {{ item.template }} \ {% endif %}
           {%if item.template is not defined %}-tick {{ item.tick }} \ {% endif %}
           -dbrp {{ item.dbrp }}
-      sleep 1
-  when: item.enabled == true
   with_items: "{{ kapacitor_tasks }}"
   tags: 'kapacitor-tick'
 
 - name: 'Enable / disable Kapacitor tasks'
   shell: |
       kapacitor {% if item.enabled %}enable{% else %}disable{% endif %} {{ item.id }}
-      sleep 1
   when:
     - kapacitor_tasks | length > 0
   with_items: "{{ kapacitor_tasks }}"

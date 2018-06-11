@@ -22,7 +22,7 @@
   with_items: "{{ kapacitor_handlers }}"
   tags: ['kapacitor-handlers']
   
--name: 'Delete disabled topic handlers'
+- name: 'Delete disabled topic handlers'
   shell: "kapacitor {% if not item.enabled %}delete topic-handlers {{ item.topic }} {{ item.id }}{% endif %}"
   when:
     - kapacitor_handlers | length > 0

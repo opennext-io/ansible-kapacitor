@@ -66,11 +66,24 @@
   with_items: "{{ kapacitor_tasks }}"
   tags: 'kapacitor-tick'
 
-- name: 'Enable / disable Kapacitor tasks'
+- name: 'Disable Kapacitor tasks'
   shell: |
-      kapacitor {% if item.enabled %}enable{% else %}disable{% endif %} {{ item.id }}
+      kapacitor disable {{ item.id }}
   when:
     - kapacitor_tasks | length > 0
+    - not item.enabled
+  with_items: "{{ kapacitor_tasks }}"
+  tags:
+    - 'kapacitor-tick'
+    - 'kapacitor-task'
+
+# Enable tasks only once
+- name: 'Enable Kapacitor tasks'
+  shell: |
+      kapacitor enable {{ item.id }}
+  when:
+    - kapacitor_tasks | length > 0
+    - item.enabled
   with_items: "{{ kapacitor_tasks }}"
   run_once: true
   tags:

@@ -54,6 +54,9 @@
           -type {{ item.type }} \
           -tick {{ item.tick }} \
   with_items: "{{ kapacitor_templates }}"
+  when:
+    - kapacitor_templates | length > 0
+    - item.enabled
   tags: 'kapacitor-tick'
 
 - name: 'Define Kapacitor tasks'
@@ -64,6 +67,9 @@
           {%if item.template is defined %}-template {{ item.template }} \ {% endif %}
           -dbrp {{ item.dbrp }}
   with_items: "{{ kapacitor_tasks }}"
+  when:
+    - kapacitor_tasks | length > 0
+    - item.enabled
   tags: 'kapacitor-tick'
 
 - name: 'Disable Kapacitor tasks'

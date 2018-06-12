@@ -145,6 +145,7 @@ default-retention-policy = "{{ kapacitor_default_retention_policy }}"
   state-changes-only = {{ kapacitor_slack_state_changes_only | to_json }}
   url = "{{ kapacitor_slack_url }}"
   username = "{{ kapacitor_slack_username }}"
+  workspace = "{{ kapacitor_slack_workspace }}"
 
 [talk]
   author_name = "{{ kapacitor_talk_author_name }}"

@@ -131,6 +131,7 @@ default-retention-policy = "{{ kapacitor_default_retention_policy }}"
   addr = "{{ kapacitor_sensu_addr }}"
   enabled = {{ kapacitor_sensu_enabled | to_json }}
   source = "{{ kapacitor_sensu_source }}"
+  handlers = "{{ kapacitor_sensu_alerts_handlers }}"
 
 [slack]
   channel = "{{ kapacitor_slack_channel }}"

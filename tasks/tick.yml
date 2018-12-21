@@ -24,6 +24,16 @@
     - "{{ kapacitor_tick_var_dest_dir }}"
   tags: 'kapacitor-tick'
 
+- name: 'Disable all Kapacitor tasks'
+  shell: |
+      kapacitor disable "*"
+  tags: 'kapacitor-tick'
+
+- name: 'Delete all Kapacitor tasks'
+  shell: |
+      kapacitor delete "*"
+  tags: 'kapacitor-tick'
+
 - name: 'Copy Kapacitor TICK script files'
   copy:
     src:  "{{ item }}"

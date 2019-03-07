@@ -31,7 +31,7 @@
 
 - name: 'Delete all Kapacitor tasks'
   shell: |
-      kapacitor delete "*"
+      kapacitor delete tasks "*"
   tags: 'kapacitor-tick'
 
 - name: 'Copy Kapacitor TICK script files'

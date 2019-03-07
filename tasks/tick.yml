@@ -27,12 +27,12 @@
 - name: 'Disable all Kapacitor tasks'
   shell: |
       kapacitor disable "*"
-  tags: 'kapacitor-tick'
+  tags: 'kapacitor-tasks'
 
 - name: 'Delete all Kapacitor tasks'
   shell: |
       kapacitor delete tasks "*"
-  tags: 'kapacitor-tick'
+  tags: 'kapacitor-tasks'
 
 - name: 'Copy Kapacitor TICK script files'
   copy:
@@ -67,7 +67,7 @@
   when:
     - kapacitor_templates | length > 0
     - item.enabled
-  tags: 'kapacitor-tick'
+  tags: 'kapacitor-template'
 
 - name: 'Define Kapacitor tasks'
   shell: |
@@ -80,10 +80,9 @@
   with_items: "{{ kapacitor_tasks }}"
   when:
     - kapacitor_tasks | length > 0
-    - item.enabled
-  tags: 'kapacitor-tick'
+  tags: 'kapacitor-task'
 
-- name: 'Disable Kapacitor tasks'
+- name: 'Disable Kapacitor tasks marked disabled'
   shell: |
       kapacitor disable {{ item.id }}
   when:
@@ -91,11 +90,10 @@
     - not item.enabled
   with_items: "{{ kapacitor_tasks }}"
   tags:
-    - 'kapacitor-tick'
     - 'kapacitor-task'
 
 # Enable tasks only once
-- name: 'Enable Kapacitor tasks'
+- name: 'Enable Kapacitor tasks marked enabled'
   shell: |
       kapacitor enable {{ item.id }}
   when:
@@ -104,5 +102,4 @@
   with_items: "{{ kapacitor_tasks }}"
   run_once: true
   tags:
-    - 'kapacitor-tick'
     - 'kapacitor-task'

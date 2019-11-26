@@ -7,14 +7,16 @@
     backup: 'yes'
   when: kapacitor_use_repo
 
-- name: 'Enterprise Linux - Install '
+- name: 'Enterprise Linux - Install Kapacitor via package'
   yum:
     name: 'kapacitor'
-    state: 'latest'
+    state: 'present'
+  notify: 'restart kapacitor'
   when: kapacitor_use_repo
 
-- name: 'Enterprise Linux - Install Chrongraf via URL'
+- name: 'Enterprise Linux - Install Kapacitor via URL'
   yum:
     name: "{{ kapacitor_rpm_pkg_url }}"
     state: 'present'
+  notify: 'restart kapacitor'
   when: not kapacitor_use_repo
